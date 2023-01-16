@@ -107,13 +107,13 @@ public class Radio implements IRadio {
 	public void setFrequence(String freq) throws Exception{
 		switch(freq){
 			case "AM":{
-				freq = "AM";
+				this.Frequence = "AM";
 				setAMActualStation(570);
 				break;
 			}
 
 			case "FM":{
-				freq = "FM";
+				this.Frequence = "FM";
 				setFMActualStation(87.9);
 				break;
 			}
@@ -231,8 +231,6 @@ public class Radio implements IRadio {
 			System.out.println("Espacio disponible.");
 		}
 		return listasaveAM[slot];
-
-		
 	}
 }
 

@@ -16,6 +16,7 @@ public interface IRadio {
 	/***
 	 * Este metodo nos ayuda a establecer la frecuencia, recibe un parametro llamado freq que puede "AM" o "FM"
 	 * @param freq La frecuencia la cual puede ser AM o FM, de lo contrario error.
+	 * @return 
 	 */
 	public void setFrequence(String freq) throws Exception;
 	
