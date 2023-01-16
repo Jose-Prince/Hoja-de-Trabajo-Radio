@@ -6,7 +6,7 @@ public class Radio implements IRadio {
 
 
 	boolean encendidoapagado;
-	String freq;
+	String Frequence;
 	double FMActualStation;
 	int AMActualStation;
 	int[] listasaveAM = new int[11];
@@ -16,7 +16,7 @@ public class Radio implements IRadio {
 
 	public Radio(){
 		encendidoapagado = false;
-		freq = "AM";
+		Frequence = "";
 		FMActualStation = 87.9;
 		AMActualStation = 530;
 		listasaveAM[0] = 1;
@@ -26,9 +26,9 @@ public class Radio implements IRadio {
 	}
 
 
-	public Radio(String freq, boolean encendidoapagado, double FMActualStation, int AMActualStation, int[] listasaveAM, double[] listasaveFM){
+	public Radio(String Frequence, boolean encendidoapagado, double FMActualStation, int AMActualStation, int[] listasaveAM, double[] listasaveFM){
 		this.encendidoapagado = encendidoapagado;
-		this.freq = freq;
+		this.Frequence = Frequence;
 		this.FMActualStation = FMActualStation;
 		this.AMActualStation = AMActualStation;
 		this.listasaveAM = listasaveAM;
@@ -36,17 +36,51 @@ public class Radio implements IRadio {
 
 
 	}
+
+
+	public boolean isEncendidoapagado() {
+		return this.encendidoapagado;
+	}
+
+	public boolean getEncendidoapagado() {
+		return this.encendidoapagado;
+	}
+
+	public void setEncendidoapagado(boolean encendidoapagado) {
+		this.encendidoapagado = encendidoapagado;
+	}
+
+	public String getFrequence() {
+		return this.Frequence;
+	}
+
+	public int[] getListasaveAM() {
+		return this.listasaveAM;
+	}
+
+	public void setListasaveAM(int[] listasaveAM) {
+		this.listasaveAM = listasaveAM;
+	}
+
+	public double[] getListasaveFM() {
+		return this.listasaveFM;
+	}
+
+	public void setListasaveFM(double[] listasaveFM) {
+		this.listasaveFM = listasaveFM;
+	}
+
 	
 	
 	
 	public void on(){
-		this.encendidoapagado = true;
+		setEncendidoapagado(true);
 		
 	}
 	
 
 	public void off(){
-		this.encendidoapagado = false;
+		setEncendidoapagado(false);
 
 		
 
@@ -60,7 +94,7 @@ public class Radio implements IRadio {
 
 		boolean estado;
 
-		estado = this.encendidoapagado;
+		estado = getEncendidoapagado();
 
 		return estado; 
 		
@@ -71,74 +105,48 @@ public class Radio implements IRadio {
 	 * @param freq La frecuencia la cual puede ser AM o FM, de lo contrario error.
 	 */
 	public void setFrequence(String freq) throws Exception{
-		
-
 		switch(freq){
 			case "AM":{
 				freq = "AM";
-				AMActualStation = 570;
-
+				setAMActualStation(570);
 				break;
-
-
-
-
 			}
 
 			case "FM":{
 				freq = "FM";
-				FMActualStation = 87.9;
-
+				setFMActualStation(87.9);
 				break;
-
-
-
 			}
 
 			default:{
-				freq = this.freq ;
+				freq = getFrequence() ;
 				break;
 			}
-
-		
-
-
 		}
-		
-
-		
-	
-		
 	}
 
-
-	
-	public String getFrequence(){
-		return this.freq;
-		
-	}
 	
 	public void Forward(){
-		switch(this.freq){
+		switch(getFrequence()){
 			case "AM":{
-				if (AMActualStation < 1610){
-					FMActualStation = FMActualStation + 10;
-
+				if (getAMActualStation() < 1610){
+					AMActualStation = getAMActualStation() + 10;
+					setAMActualStation(AMActualStation);
 				}
 				else{
-					System.out.println("Hasta el fondo Mijin digo digo alcanzo al tope de frecuencia de radio");
+					setAMActualStation(530);
 				}
 
 			}
 
 
 			case "FM":{
-				if (FMActualStation < 107.9){
-					FMActualStation = FMActualStation + 0.2;
-
+				if (getFMActualStation() < 107.9){
+					FMActualStation = getFMActualStation() + 0.2;
+					setFMActualStation(FMActualStation);
 				}
 				else{
-					System.out.println("Hasta el fondo Mijin digo digo alcanzo al tope de frecuencia de radio");
+					setFMActualStation(87.9);
 				}
 
 			}
@@ -146,26 +154,25 @@ public class Radio implements IRadio {
 	}
 	
 	public void Backward(){
-		switch(this.freq){
+		switch(getFrequence()){
 			case "AM":{
-				if (AMActualStation > 530){
-					FMActualStation = FMActualStation - 10;
-
+				if (getAMActualStation() > 530){
+					AMActualStation = getAMActualStation() - 10;
+					setAMActualStation(AMActualStation);
 				}
 				else{
-					System.out.println("Hasta el fondo Mijin digo digo alcanzo al tope de frecuencia de radio");
+					setAMActualStation(1610);
 				}
-
 			}
 
 
 			case "FM":{
-				if (FMActualStation > 87.9){
-					FMActualStation = FMActualStation - 0.2;
-
+				if (getFMActualStation() > 87.9){
+					FMActualStation = getFMActualStation() - 0.2;
+					setFMActualStation(FMActualStation);
 				}
 				else{
-					System.out.println("Hasta el fondo Mijin digo digo alcanzo al tope de frecuencia de radio");
+					setFMActualStation(107.9);
 				}
 
 			}
