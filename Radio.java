@@ -1,4 +1,3 @@
-
 /**
  * 
  */
@@ -9,10 +8,13 @@
  */
 public class Radio implements IRadio {
 
+
 	boolean encendidoapagado;
 	String freq;
 	double FMActualStation;
 	int AMActualStation;
+	int[] listasaveAM = new int[11];
+	double[] listasaveFM = new double[11];
 	
 
 
@@ -21,14 +23,21 @@ public class Radio implements IRadio {
 		freq = "AM";
 		FMActualStation = 87.9;
 		AMActualStation = 530;
+		listasaveAM[0] = 1;
+		listasaveFM[0] = 1;
+		
+		
 	}
 
 
-	public Radio(String freq, boolean encendidoapagado, double FMActualStation, int AMActualStation){
+	public Radio(String freq, boolean encendidoapagado, double FMActualStation, int AMActualStation, int[] listasaveAM, double[] listasaveFM){
 		this.encendidoapagado = encendidoapagado;
 		this.freq = freq;
 		this.FMActualStation = FMActualStation;
 		this.AMActualStation = AMActualStation;
+		this.listasaveAM = listasaveAM;
+		this.listasaveFM = listasaveFM;
+
 
 	}
 	
@@ -56,10 +65,7 @@ public class Radio implements IRadio {
 		boolean estado;
 
 		estado = this.encendidoapagado;
-		
-		
-		
-		
+
 		return estado; 
 		
 	}
@@ -73,7 +79,10 @@ public class Radio implements IRadio {
 
 		switch(freq){
 			case "AM":{
-				freq = "Se ha cambiado a frequencia AM Actualmente esta en la frecuencia 530";
+				freq = "AM";
+				AMActualStation = 570;
+
+				break;
 
 
 
@@ -84,12 +93,15 @@ public class Radio implements IRadio {
 				freq = "FM";
 				FMActualStation = 87.9;
 
+				break;
+
 
 
 			}
 
 			default:{
-				freq = "Error regresando a la frecuencia actual " + this.freq ;
+				freq = this.freq ;
+				break;
 			}
 
 		
@@ -106,54 +118,120 @@ public class Radio implements IRadio {
 
 	
 	public String getFrequence(){
-		return null;
+		return this.freq;
 		
 	}
 	
 	public void Forward(){
-		
+		switch(this.freq){
+			case "AM":{
+				if (AMActualStation < 1610){
+					FMActualStation = FMActualStation + 10;
+
+				}
+				else{
+					System.out.println("Hasta el fondo Mijin digo digo alcanzo al tope de frecuencia de radio");
+				}
+
+			}
+
+
+			case "FM":{
+				if (FMActualStation < 107.9){
+					FMActualStation = FMActualStation + 0.2;
+
+				}
+				else{
+					System.out.println("Hasta el fondo Mijin digo digo alcanzo al tope de frecuencia de radio");
+				}
+
+			}
+		}
 	}
 	
-	public void Backward(){}
-	
-	public double getFMActualStation(){
-		return AMActualStation;}
-	
-	public int getAMActualStation(){
-		return AMActualStation;}
-	
-	//Regresa el la estacion a FM
-	public void setFMActualStation(double actualStation){
+	public void Backward(){
+		switch(this.freq){
+			case "AM":{
+				if (AMActualStation > 530){
+					FMActualStation = FMActualStation - 10;
+
+				}
+				else{
+					System.out.println("Hasta el fondo Mijin digo digo alcanzo al tope de frecuencia de radio");
+				}
+
+			}
+
+
+			case "FM":{
+				if (FMActualStation > 87.9){
+					FMActualStation = FMActualStation - 0.2;
+
+				}
+				else{
+					System.out.println("Hasta el fondo Mijin digo digo alcanzo al tope de frecuencia de radio");
+				}
+
+			}
+		}
 
 	}
 	
-	//Regresa la estacion a AM
+	public double getFMActualStation(){
+		return this.FMActualStation;}
+	
+	public int getAMActualStation(){
+		return this.AMActualStation;}
+	
+	//Regresa el la estacion a FM
+	public void setFMActualStation(double actualStation){
+		this.FMActualStation = actualStation;
+
+	}
+	
+	//Regresa la estacion a AM con frecuencia
 	public void setAMActualStation(int actualStation){
+		this.AMActualStation = actualStation;
 
 	}
 
 	
 	
 	public void saveFMStation(double actualStation, int slot){
+		listasaveFM[slot] = actualStation;
+		
+		
 
 	}
 	
 	public void saveAMStation(int actualStation, int slot){
+		listasaveAM[slot] = actualStation;
 
 	}
 	
 	public double getFMSlot(int slot){
-		return slot;
+		try {
+			System.out.println(listasaveFM[slot]);
+			
+		} catch (Exception e) {
+			System.out.println("Espacio disponible.");
+		}
+		return listasaveFM[slot];
 
 	}
 	
 	public int getAMSlot(int slot){
-		return slot;
+		try {
+			System.out.println(listasaveAM[slot]);
+			
+		} catch (Exception e) {
+			System.out.println("Espacio disponible.");
+		}
+		return listasaveAM[slot];
+
 		
 	}
 }
 
 
     
-    
-
