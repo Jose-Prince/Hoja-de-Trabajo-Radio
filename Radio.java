@@ -9,8 +9,8 @@ public class Radio implements IRadio {
 	String Frequence;
 	double FMActualStation;
 	int AMActualStation;
-	int[] listasaveAM = new int[11];
-	double[] listasaveFM = new double[11];
+	int[] listasaveAM = new int[12];
+	double[] listasaveFM = new double[12];
 	
 
 
