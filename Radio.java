@@ -105,24 +105,25 @@ public class Radio implements IRadio {
 	 * @param freq La frecuencia la cual puede ser AM o FM, de lo contrario error.
 	 */
 	public void setFrequence(String freq) throws Exception{
-		switch(freq){
-			case "AM":{
-				this.Frequence = "AM";
-				setAMActualStation(570);
-				break;
-			}
 
-			case "FM":{
-				this.Frequence = "FM";
-				setFMActualStation(87.9);
-				break;
+			switch(freq){
+				case "AM":{
+					this.Frequence = "AM";
+					setAMActualStation(530);
+					break;
+				}
+	
+				case "FM":{
+					this.Frequence = "FM";
+					setFMActualStation(87.9);
+					break;
+				}
+	
+				default:{
+					freq = getFrequence() ;
+					break;
+				}
 			}
-
-			default:{
-				freq = getFrequence() ;
-				break;
-			}
-		}
 	}
 
 	
@@ -214,23 +215,30 @@ public class Radio implements IRadio {
 	
 	public double getFMSlot(int slot){
 		try {
-			System.out.println(listasaveFM[slot]);
+			if (listasaveFM[slot-1] < 87.9 || listasaveFM[slot-1] > 107.9){
+				setFMActualStation(87.9);
+			}
+			setFMActualStation(listasaveFM[slot-1]);
 			
 		} catch (Exception e) {
 			System.out.println("Espacio disponible.");
 		}
-		return listasaveFM[slot];
+		return listasaveFM[slot-1];
 
 	}
 	
 	public int getAMSlot(int slot){
 		try {
-			System.out.println(listasaveAM[slot]);
+			if (listasaveAM[slot-1] < 530 || listasaveAM[slot-1] > 1610){
+				setAMActualStation(530);
+			} else{
+				setAMActualStation(listasaveAM[slot-1]);
+			}
 			
 		} catch (Exception e) {
 			System.out.println("Espacio disponible.");
 		}
-		return listasaveAM[slot];
+		return listasaveAM[slot-1];
 	}
 }
 
