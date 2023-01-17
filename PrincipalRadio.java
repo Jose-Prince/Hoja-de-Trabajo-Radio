@@ -48,10 +48,10 @@ public class PrincipalRadio {
                         espacioGuardado = teclado.nextInt();
                         teclado.nextLine();
                         if (miRadio.getFrequence() == "AM"){
-                            miRadio.saveAMStation(miRadio.getAMActualStation(), espacioGuardado);
+                            miRadio.saveAMStation(miRadio.getAMActualStation(), espacioGuardado-1);
                             System.out.println("Guardado exitoso");
                         } else {
-                            miRadio.saveFMStation(miRadio.getFMActualStation(), espacioGuardado);
+                            miRadio.saveFMStation(miRadio.getFMActualStation(), espacioGuardado-1);
                             System.out.println("Guardado exitoso");
                         }
                     } catch (Exception e) {
