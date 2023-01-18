@@ -1,11 +1,17 @@
+/**
+ * @author Jose Prince
+ */
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
 public class TestRadio {
     
     IRadio miRadio = new Radio();
 
+    
+    /** 
+     * @throws Exception
+     */
     @Test
     public void setFrequenceAMTest() throws Exception{
         miRadio.setFrequence("AM");
@@ -14,6 +20,10 @@ public class TestRadio {
 
     }
 
+    
+    /** 
+     * @throws Exception
+     */
     @Test
     public void setFrequenceFMTest() throws Exception{
         miRadio.setFrequence("FM");
@@ -22,6 +32,10 @@ public class TestRadio {
 
     }
 
+    
+    /** 
+     * @throws Exception
+     */
     @Test
     public void ForwardTest() throws Exception{
         miRadio.setFrequence("FM");
@@ -30,6 +44,10 @@ public class TestRadio {
         assertEquals(88.1, estacion, 88.1);
     }
 
+    
+    /** 
+     * @throws Exception
+     */
     @Test
     public void BackwardTest() throws Exception{
         miRadio.setFrequence("AM");
