@@ -1,6 +1,9 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * @author MrAndrewlol
- *
+ * @author José Prince
  */
 public class Radio implements IRadio {
 
@@ -38,47 +41,83 @@ public class Radio implements IRadio {
 	}
 
 
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean isEncendidoapagado() {
 		return this.encendidoapagado;
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean getEncendidoapagado() {
 		return this.encendidoapagado;
 	}
 
+	
+	/** 
+	 * @param encendidoapagado encendidoapagado to set
+	 */
 	public void setEncendidoapagado(boolean encendidoapagado) {
 		this.encendidoapagado = encendidoapagado;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getFrequence() {
 		return this.Frequence;
 	}
 
+	
+	/** 
+	 * @return int[]
+	 */
 	public int[] getListasaveAM() {
 		return this.listasaveAM;
 	}
 
+	
+	/** 
+	 * @param listasaveAM listasaveAM to set
+	 */
 	public void setListasaveAM(int[] listasaveAM) {
 		this.listasaveAM = listasaveAM;
 	}
 
+	
+	/** 
+	 * @return double[]
+	 */
 	public double[] getListasaveFM() {
 		return this.listasaveFM;
 	}
 
+	
+	/** 
+	 * @param listasaveFM listasaveFM to set
+	 */
 	public void setListasaveFM(double[] listasaveFM) {
 		this.listasaveFM = listasaveFM;
 	}
 
 	
 	
-	
+	/**
+	 * Enciende la radio
+	 */
 	public void on(){
 		setEncendidoapagado(true);
 		
 	}
 	
-
+	/**
+	 * Apaga la radio
+	 */
 	public void off(){
 		setEncendidoapagado(false);
 
@@ -126,7 +165,9 @@ public class Radio implements IRadio {
 			}
 	}
 
-	
+	/**
+	 * Cambia la emisora que se esta escuchando por la emisora siguiente
+	 */
 	public void Forward(){
 		switch(getFrequence()){
 			case "AM":{
@@ -144,7 +185,9 @@ public class Radio implements IRadio {
 			case "FM":{
 				if (getFMActualStation() < 107.9){
 					FMActualStation = getFMActualStation() + 0.2;
-					setFMActualStation(FMActualStation);
+					BigDecimal bd = new BigDecimal(FMActualStation).setScale(2, RoundingMode.HALF_UP);
+					double FMActualStation2 = bd.doubleValue();
+					setFMActualStation(FMActualStation2);
 				}
 				else{
 					setFMActualStation(87.9);
@@ -154,6 +197,9 @@ public class Radio implements IRadio {
 		}
 	}
 	
+	/**
+	 * Cambia la emisora que se esta escuchando por la emisora anterior
+	 */
 	public void Backward(){
 		switch(getFrequence()){
 			case "AM":{
@@ -170,7 +216,9 @@ public class Radio implements IRadio {
 			case "FM":{
 				if (getFMActualStation() > 87.9){
 					FMActualStation = getFMActualStation() - 0.2;
-					setFMActualStation(FMActualStation);
+					BigDecimal bd = new BigDecimal(FMActualStation).setScale(2, RoundingMode.HALF_UP);
+					double FMActualStation2 = bd.doubleValue();
+					setFMActualStation(FMActualStation2);
 				}
 				else{
 					setFMActualStation(107.9);
@@ -181,18 +229,34 @@ public class Radio implements IRadio {
 
 	}
 	
+	
+	/** 
+	 * @return double
+	 */
 	public double getFMActualStation(){
 		return this.FMActualStation;}
 	
+	
+	/** 
+	 * @return int
+	 */
 	public int getAMActualStation(){
 		return this.AMActualStation;}
 	
+	
+	/** 
+	 * @param actualStation actualStation to set
+	 */
 	//Regresa el la estacion a FM
 	public void setFMActualStation(double actualStation){
 		this.FMActualStation = actualStation;
 
 	}
 	
+	
+	/** 
+	 * @param actualStation actualStation to set
+	 */
 	//Regresa la estacion a AM con frecuencia
 	public void setAMActualStation(int actualStation){
 		this.AMActualStation = actualStation;
@@ -201,6 +265,12 @@ public class Radio implements IRadio {
 
 	
 	
+	
+	/** 
+	 * @param actualStation
+	 * @param slot
+	 * Guarda la emisora FM indicada
+	 */
 	public void saveFMStation(double actualStation, int slot){
 		listasaveFM[slot] = actualStation;
 		
@@ -208,11 +278,23 @@ public class Radio implements IRadio {
 
 	}
 	
+	
+	/** 
+	 * @param actualStation
+	 * @param slot
+	 * Guarda la emisora AM indicada
+	 */
 	public void saveAMStation(int actualStation, int slot){
 		listasaveAM[slot] = actualStation;
 
 	}
 	
+	
+	/** 
+	 * @param slot
+	 * @return double
+	 * Obtiene la emisora guardada en el espacio seleccionado
+	 */
 	public double getFMSlot(int slot){
 		try {
 			if (listasaveFM[slot-1] < 87.9 || listasaveFM[slot-1] > 107.9){
@@ -227,6 +309,12 @@ public class Radio implements IRadio {
 
 	}
 	
+	
+	/** 
+	 * @param slot
+	 * @return int
+	 * Obtiene la emisora guardada en el espacio seleccionado
+	 */
 	public int getAMSlot(int slot){
 		try {
 			if (listasaveAM[slot-1] < 530 || listasaveAM[slot-1] > 1610){
