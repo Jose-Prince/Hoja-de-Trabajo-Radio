@@ -1,6 +1,14 @@
+/**
+ * @author Jose Prince
+ */
 import java.util.Scanner;
 
 public class PrincipalRadio {
+    
+    /** 
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         
         Radio miRadio = new Radio();
@@ -48,10 +56,10 @@ public class PrincipalRadio {
                         espacioGuardado = teclado.nextInt();
                         teclado.nextLine();
                         if (miRadio.getFrequence() == "AM"){
-                            miRadio.saveAMStation(miRadio.getAMActualStation(), espacioGuardado-1);
+                            miRadio.saveAMStation(miRadio.getAMActualStation(), espacioGuardado);
                             System.out.println("Guardado exitoso");
                         } else {
-                            miRadio.saveFMStation(miRadio.getFMActualStation(), espacioGuardado-1);
+                            miRadio.saveFMStation(miRadio.getFMActualStation(), espacioGuardado);
                             System.out.println("Guardado exitoso");
                         }
                     } catch (Exception e) {
